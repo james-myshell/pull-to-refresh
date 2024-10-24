@@ -74,7 +74,7 @@ public extension ES where Base: UIScrollView {
         removeRefreshFooter()
         let footer = ESRefreshFooterView(frame: CGRect.zero, handler: handler)
         let footerH = footer.animator.executeIncremental
-        footer.frame = CGRect.init(x: 0.0, y: self.base.contentSize.height + self.base.contentInset.bottom, width: self.base.bounds.size.width, height: footerH)
+        footer.frame = CGRect.init(x: 0.0, y: self.base.contentSize.height, width: self.base.bounds.size.width, height: footerH)
         self.base.addSubview(footer)
         self.base.footer = footer
         return footer
@@ -85,7 +85,7 @@ public extension ES where Base: UIScrollView {
         removeRefreshFooter()
         let footer = ESRefreshFooterView(frame: CGRect.zero, handler: handler, animator: animator)
         let footerH = footer.animator.executeIncremental
-        footer.frame = CGRect.init(x: 0.0, y: self.base.contentSize.height + self.base.contentInset.bottom, width: self.base.bounds.size.width, height: footerH)
+        footer.frame = CGRect.init(x: 0.0, y: self.base.contentSize.height, width: self.base.bounds.size.width, height: footerH)
         self.base.footer = footer
         self.base.addSubview(footer)
         return footer
@@ -388,7 +388,7 @@ open class ESRefreshFooterView: ESRefreshComponent {
     open override func sizeChangeAction(object: AnyObject?, change: [NSKeyValueChangeKey : Any]?) {
         guard let scrollView = scrollView else { return }
         super.sizeChangeAction(object: object, change: change)
-        let targetY = scrollView.contentSize.height + scrollViewInsets.bottom
+        let targetY = scrollView.contentSize.height
         if self.frame.origin.y != targetY {
             var rect = self.frame
             rect.origin.y = targetY
